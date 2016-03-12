@@ -3384,7 +3384,7 @@ const idDeclParticle *idAI::SpawnParticlesOnJoint( particleEmitter_t &pe, const 
 			pe.time = gameLocal.time;
 		}
 		pe.particle = static_cast<const idDeclParticle *>( declManager->FindType( DECL_PARTICLE, particleName ) );
-		gameLocal.smokeParticles->EmitSmoke( pe.particle, pe.time, gameLocal.random.CRandomFloat(), origin, axis, timeGroup /*_D3XP*/ );
+		gameLocal.smokeParticles->EmitSmoke( pe.particle, pe.time, gameLocal.random.CRandomFloat(), origin, axis D3XP_OPTIONAL(timeGroup) /*_D3XP*/ );
 	}
 
 	return pe.particle;
@@ -4266,10 +4266,10 @@ idProjectile *idAI::LaunchProjectile( const char *jointname, idEntity *target, b
 
 #ifdef _D3XP
 	proj_axis = axis;
-#endif
 
 	if ( !forceMuzzle ) {	// _D3XP
-		// make sure the projectile starts inside the monster bounding box
+#endif
+        // make sure the projectile starts inside the monster bounding box
 		const idBounds &ownerBounds = physicsObj.GetAbsBounds();
 		projClip = lastProjectile->GetPhysics()->GetClipModel();
 		projBounds = projClip->GetBounds().Rotate( axis );
@@ -4290,7 +4290,9 @@ idProjectile *idAI::LaunchProjectile( const char *jointname, idEntity *target, b
 
 		gameLocal.clip.Translation( tr, start, muzzle, projClip, axis, MASK_SHOT_RENDERMODEL, this );
 		muzzle = tr.endpos;
-	}
+#ifdef _D3XP
+    }
+#endif
 
 	// set aiming direction
 	GetAimDir( muzzle, target, this, dir );
@@ -4806,7 +4808,7 @@ void idAI::UpdateParticles( void ) {
 					realVector = physicsObj.GetOrigin() + ( realVector + modelOffset ) * ( viewAxis * physicsObj.GetGravityAxis() );
 				}
 
-				if ( !gameLocal.smokeParticles->EmitSmoke( particles[i].particle, particles[i].time, gameLocal.random.CRandomFloat(), realVector, realAxis, timeGroup /*_D3XP*/ )) {
+				if ( !gameLocal.smokeParticles->EmitSmoke( particles[i].particle, particles[i].time, gameLocal.random.CRandomFloat(), realVector, realAxis D3XP_OPTIONAL(timeGroup) /*_D3XP*/ )) {
 					if ( restartParticles ) {
 						particles[i].time = gameLocal.time;
 					} else {

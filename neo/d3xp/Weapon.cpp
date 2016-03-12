@@ -1686,7 +1686,11 @@ void idWeapon::BeginAttack( void ) {
 	}
 
 	if ( !WEAPON_ATTACK ) {
+#ifdef _D3XP
 		if ( sndHum && grabberState == -1 ) {	// _D3XP :: don't stop grabber hum
+#else
+		if ( sndHum ) {
+#endif
 			StopSound( SND_CHANNEL_BODY, false );
 		}
 	}
@@ -1704,7 +1708,11 @@ void idWeapon::EndAttack( void ) {
 	}
 	if ( WEAPON_ATTACK ) {
 		WEAPON_ATTACK = false;
+#ifdef _D3XP
 		if ( sndHum && grabberState == -1 ) {	// _D3XP :: don't stop grabber hum
+#else
+		if ( sndHum ) {
+#endif
 			StartSoundShader( sndHum, SND_CHANNEL_BODY, 0, false, NULL );
 		}
 	}
@@ -2236,14 +2244,14 @@ void idWeapon::PresentWeapon( bool showViewModel ) {
 			muzzleAxis = playerViewAxis;
 		}
 		// spit out a particle
-		if ( !gameLocal.smokeParticles->EmitSmoke( weaponSmoke, weaponSmokeStartTime, gameLocal.random.RandomFloat(), muzzleOrigin, muzzleAxis, timeGroup /*_D3XP*/ ) ) {
+		if ( !gameLocal.smokeParticles->EmitSmoke( weaponSmoke, weaponSmokeStartTime, gameLocal.random.RandomFloat(), muzzleOrigin, muzzleAxis D3XP_OPTIONAL(timeGroup) /*_D3XP*/ ) ) {
 			weaponSmokeStartTime = ( continuousSmoke ) ? gameLocal.time : 0;
 		}
 	}
 
 	if ( showViewModel && strikeSmoke && strikeSmokeStartTime != 0 ) {
 		// spit out a particle
-		if ( !gameLocal.smokeParticles->EmitSmoke( strikeSmoke, strikeSmokeStartTime, gameLocal.random.RandomFloat(), strikePos, strikeAxis, timeGroup /*_D3XP*/ ) ) {
+		if ( !gameLocal.smokeParticles->EmitSmoke( strikeSmoke, strikeSmokeStartTime, gameLocal.random.RandomFloat(), strikePos, strikeAxis D3XP_OPTIONAL(timeGroup) /*_D3XP*/ ) ) {
 			strikeSmokeStartTime = 0;
 		}
 	}
@@ -2263,7 +2271,7 @@ void idWeapon::PresentWeapon( bool showViewModel ) {
 						muzzleOrigin = playerViewOrigin;
 						muzzleAxis = playerViewAxis;
 					}
-					if ( !gameLocal.smokeParticles->EmitSmoke( part->particle, part->startTime, gameLocal.random.RandomFloat(), muzzleOrigin, muzzleAxis, timeGroup /*_D3XP*/ ) ) {
+					if ( !gameLocal.smokeParticles->EmitSmoke( part->particle, part->startTime, gameLocal.random.RandomFloat(), muzzleOrigin, muzzleAxis D3XP_OPTIONAL(timeGroup) /*_D3XP*/ ) ) {
 						part->active = false;	// all done
 						part->startTime = 0;
 					}

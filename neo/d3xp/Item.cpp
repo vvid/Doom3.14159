@@ -1387,6 +1387,9 @@ idObjective::Restore
 */
 void idObjective::Restore( idRestoreGame *savefile ) {
 	savefile->ReadVec3( playerPos );
+#ifndef _D3XP
+    PostEventMS( &EV_CamShot, 250 );
+#endif
 }
 
 /*
@@ -1396,9 +1399,13 @@ idObjective::Spawn
 */
 void idObjective::Spawn( void ) {
 	Hide();
+#ifdef _D3XP
 	if ( cvarSystem->GetCVarBool( "com_makingBuild") ) {
 		PostEventMS( &EV_CamShot, 250 );
 	}
+#else
+    PostEventMS( &EV_CamShot, 250 );
+#endif
 }
 
 /*
@@ -1759,7 +1766,7 @@ void idMoveableItem::Think( void ) {
 	}
 	
 	if ( thinkFlags & TH_UPDATEPARTICLES ) {
-		if ( !gameLocal.smokeParticles->EmitSmoke( smoke, smokeTime, gameLocal.random.CRandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), timeGroup /*_D3XP*/ ) ) {
+        if ( !gameLocal.smokeParticles->EmitSmoke( smoke, smokeTime, gameLocal.random.CRandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis() D3XP_OPTIONAL(timeGroup) ) ) {
 #ifdef CTF
 			if ( !repeatSmoke ) {
 				smokeTime = 0;
@@ -1959,7 +1966,7 @@ void idMoveableItem::Gib( const idVec3 &dir, const char *damageDefName ) {
 	const char *smokeName = spawnArgs.GetString( "smoke_gib" );
 	if ( *smokeName != '\0' ) {
 		const idDeclParticle *smoke = static_cast<const idDeclParticle *>( declManager->FindType( DECL_PARTICLE, smokeName ) );
-		gameLocal.smokeParticles->EmitSmoke( smoke, gameLocal.time, gameLocal.random.CRandomFloat(), renderEntity.origin, renderEntity.axis, timeGroup /*_D3XP*/ );
+		gameLocal.smokeParticles->EmitSmoke( smoke, gameLocal.time, gameLocal.random.CRandomFloat(), renderEntity.origin, renderEntity.axis D3XP_OPTIONAL(timeGroup) );
 	}
 	// remove the entity
 	PostEventMS( &EV_Remove, 0 );
@@ -2117,7 +2124,6 @@ void idObjectiveComplete::Event_Trigger( idEntity *activator ) {
 		if ( spawnArgs.GetString( "inv_objective", NULL ) ) {
 	 		if ( player->hud ) {
 				player->hud->SetStateString( "objective", "2");
-
 				player->hud->SetStateString( "objectivetext", spawnArgs.GetString( "objectivetext" ) );
 #ifdef _D3XP
 				player->hud->SetStateString( "objectivecompletetitle", spawnArgs.GetString( "objectivetitle" ) );

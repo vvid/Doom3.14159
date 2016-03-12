@@ -168,7 +168,7 @@ const int MAX_EXPRESSION_REGISTERS = 4096;
 #if defined(_D3XP)
 #include "../d3xp/Game.h"
 #else
-#include "../game/Game.h"
+#include "../d3xp/Game.h"
 #endif
 
 //-----------------------------------------------------
@@ -180,7 +180,7 @@ const int MAX_EXPRESSION_REGISTERS = 4096;
 #if defined(_D3XP)
 #include "../d3xp/Game_local.h"
 #else
-#include "../game/Game_local.h"
+#include "../d3xp/Game_local.h"
 #endif
 
 #else

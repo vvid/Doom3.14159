@@ -2124,7 +2124,7 @@ void idAFEntity_VehicleFourWheels::Think( void ) {
 			for ( i = 0; i < 4; i++ ) {
 				numContacts = af.GetPhysics()->GetBodyContactConstraints( wheels[i]->GetClipModel()->GetId(), contacts, 2 );
 				for ( int j = 0; j < numContacts; j++ ) {
-					gameLocal.smokeParticles->EmitSmoke( dustSmoke, gameLocal.time, gameLocal.random.RandomFloat(), contacts[j]->GetContact().point, contacts[j]->GetContact().normal.ToMat3(), timeGroup /* D3XP */ );
+					gameLocal.smokeParticles->EmitSmoke( dustSmoke, gameLocal.time, gameLocal.random.RandomFloat(), contacts[j]->GetContact().point, contacts[j]->GetContact().normal.ToMat3() D3XP_OPTIONAL(timeGroup) );
 				}
 			}
 		}
@@ -2316,7 +2316,7 @@ void idAFEntity_VehicleSixWheels::Think( void ) {
 			for ( i = 0; i < 6; i++ ) {
 				numContacts = af.GetPhysics()->GetBodyContactConstraints( wheels[i]->GetClipModel()->GetId(), contacts, 2 );
 				for ( int j = 0; j < numContacts; j++ ) {
-					gameLocal.smokeParticles->EmitSmoke( dustSmoke, gameLocal.time, gameLocal.random.RandomFloat(), contacts[j]->GetContact().point, contacts[j]->GetContact().normal.ToMat3(), timeGroup /* D3XP */ );
+					gameLocal.smokeParticles->EmitSmoke( dustSmoke, gameLocal.time, gameLocal.random.RandomFloat(), contacts[j]->GetContact().point, contacts[j]->GetContact().normal.ToMat3() D3XP_OPTIONAL(timeGroup) );
 				}
 			}
 		}

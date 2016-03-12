@@ -451,11 +451,8 @@ idMultiplayerGame::UpdateScoreboard
 void idMultiplayerGame::UpdateScoreboard( idUserInterface *scoreBoard, idPlayer *player ) {
 	int i, j, iline, k;
 	idStr gameinfo;
-#ifdef _D3XP
 	idStr livesinfo;
 	idStr timeinfo;
-#endif
-
 	idEntity *ent;
 	idPlayer *p;
 	int value;
@@ -951,7 +948,7 @@ if there is no FragLeader(), the game is tied and we return NULL
 */
 idPlayer *idMultiplayerGame::FragLimitHit() {
 	int i;
-	int fragLimit		= gameLocal.serverInfo.GetInt( "si_fragLimit" );
+	int fragLimit = gameLocal.serverInfo.GetInt( "si_fragLimit" );
 	idPlayer *leader;
 
 #ifdef CTF
@@ -3456,7 +3453,8 @@ void idMultiplayerGame::ServerCallVote( int clientNum, const idBitMsg &msg ) {
 			strcpy( value, si_gameTypeArgs[ vote_gameTypeIndex ] );
 #endif
 
-/*#ifdef CTF
+#ifndef _D3XP
+#ifdef CTF
 			assert( vote_gameTypeIndex >= 0 && vote_gameTypeIndex <= 4 );
 #else
 			assert( vote_gameTypeIndex >= 0 && vote_gameTypeIndex <= 3 );
@@ -3479,7 +3477,8 @@ void idMultiplayerGame::ServerCallVote( int clientNum, const idBitMsg &msg ) {
 					strcpy( value, "CTF" );
 					break;
 #endif
-			}*/
+			}
+#endif
 			if ( !idStr::Icmp( value, gameLocal.serverInfo.GetString( "si_gameType" ) ) ) {
 				gameLocal.ServerSendChatMessage( clientNum, "server", common->GetLanguageDict()->GetString( "#str_04259" ) );
 				common->DPrintf( "client %d: already at the voted Game Type\n", clientNum );
@@ -4158,6 +4157,7 @@ idMultiplayerGame::IsGametypeTeamBased
 */
 bool idMultiplayerGame::IsGametypeTeamBased( void ) /* CTF */
 {
+#ifdef _D3XP
     switch ( gameLocal.gameType )
     {
     case GAME_SP:
@@ -4176,6 +4176,9 @@ bool idMultiplayerGame::IsGametypeTeamBased( void ) /* CTF */
     }
 
     return false;
+#else
+	return gameLocal.gameType == GAME_TDM;
+#endif
 }
 
 /*

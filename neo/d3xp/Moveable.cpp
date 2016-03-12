@@ -137,8 +137,13 @@ void idMoveable::Spawn( void ) {
 	attacker = NULL;
 #endif
 	canDamage = spawnArgs.GetBool( "damageWhenActive" ) ? false : true;
+#ifdef _D3XP
 	minDamageVelocity = spawnArgs.GetFloat( "minDamageVelocity", "300" );	// _D3XP
 	maxDamageVelocity = spawnArgs.GetFloat( "maxDamageVelocity", "700" );	// _D3XP
+#else
+	minDamageVelocity = spawnArgs.GetFloat( "minDamageVelocity", "100" );
+	maxDamageVelocity = spawnArgs.GetFloat( "maxDamageVelocity", "200" );
+#endif
 	nextDamageTime = 0;
 	nextSoundTime = 0;
 
@@ -296,6 +301,7 @@ bool idMoveable::Collide( const trace_t &collision, const idVec3 &velocity ) {
 		nextSoundTime = gameLocal.time + 500;
 	}
 
+#ifdef _D3XP
 	// _D3XP :: changes relating to the addition of monsterDamage
 	if ( !gameLocal.isClient && canDamage && gameLocal.time > nextDamageTime ) {
 		bool hasDamage = damage.Length() > 0;
@@ -308,18 +314,13 @@ bool idMoveable::Collide( const trace_t &collision, const idVec3 &velocity ) {
 				dir = velocity;
 				dir.NormalizeFast();
 				if ( ent->IsType( idAI::Type ) && hasMonsterDamage ) {
-#ifdef _D3XP
 					if ( attacker ) {
 						ent->Damage( this, attacker, dir, monsterDamage, f, INVALID_JOINT );
 					}
 					else {
 						ent->Damage( this, GetPhysics()->GetClipModel()->GetOwner(), dir, monsterDamage, f, INVALID_JOINT );
 					}
-#else
-					ent->Damage( this, GetPhysics()->GetClipModel()->GetOwner(), dir, monsterDamage, f, INVALID_JOINT );
-#endif
 				} else if ( hasDamage ) {
-#ifdef _D3XP
 					// in multiplayer, scale damage wrt mass of object
 					if ( gameLocal.isMultiplayer ) {
 						f *= GetPhysics()->GetMass() * g_moveableDamageScale.GetFloat();
@@ -331,9 +332,6 @@ bool idMoveable::Collide( const trace_t &collision, const idVec3 &velocity ) {
 					else {
 						ent->Damage( this, GetPhysics()->GetClipModel()->GetOwner(), dir, damage, f, INVALID_JOINT );
 					}
-#else
-					ent->Damage( this, GetPhysics()->GetClipModel()->GetOwner(), dir, damage, f, INVALID_JOINT );
-#endif
 				}
 
 				nextDamageTime = gameLocal.time + 1000;
@@ -341,12 +339,23 @@ bool idMoveable::Collide( const trace_t &collision, const idVec3 &velocity ) {
 		}
 	}
 
-#ifdef _D3XP
 	if ( this->IsType( idExplodingBarrel::Type ) ) {
 		idExplodingBarrel *ebarrel = static_cast<idExplodingBarrel*>(this);
 
 		if ( !ebarrel->IsStable() ) {
 			PostEventSec( &EV_Explode, 0.04f );
+		}
+	}
+
+#else
+	if ( canDamage && damage.Length() && gameLocal.time > nextDamageTime ) {
+		ent = gameLocal.entities[ collision.c.entityNum ];
+		if ( ent && v > minDamageVelocity ) {
+			f = v > maxDamageVelocity ? 1.0f : idMath::Sqrt( v - minDamageVelocity ) * ( 1.0f / idMath::Sqrt( maxDamageVelocity - minDamageVelocity ) );
+			dir = velocity;
+			dir.NormalizeFast();
+			ent->Damage( this, GetPhysics()->GetClipModel()->GetOwner(), dir, damage, f, INVALID_JOINT );
+			nextDamageTime = gameLocal.time + 1000;
 		}
 	}
 #endif
@@ -422,7 +431,11 @@ void idMoveable::EnableDamage( bool enable, float duration ) {
 
 	canDamage = enable;
 	if ( duration ) {
+#ifdef _D3XP
 		PostEventSec( &EV_EnableDamage, duration, ( /*_D3XP*/enable ) ? 0.0f : 1.0f );
+#else
+		PostEventSec( &EV_EnableDamage, duration, ( !enable ) ? 0.0f : 1.0f );
+#endif
 	}
 }
 

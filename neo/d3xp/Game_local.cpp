@@ -1062,8 +1062,6 @@ void idGameLocal::LocalMapRestart( ) {
 
 	MapClear( false );
 
-
-
 	// clear the smoke particle free list
 	smokeParticles->Init();
 
@@ -4116,7 +4114,7 @@ void idGameLocal::ProjectDecal( const idVec3 &origin, const idVec3 &dir, float d
 	winding += idVec5( windingOrigin + ( axis * decalWinding[1] ) * size, idVec2( 0, 1 ) );
 	winding += idVec5( windingOrigin + ( axis * decalWinding[2] ) * size, idVec2( 0, 0 ) );
 	winding += idVec5( windingOrigin + ( axis * decalWinding[3] ) * size, idVec2( 1, 0 ) );
-	gameRenderWorld->ProjectDecalOntoWorld( winding, projectionOrigin, parallel, depth * 0.5f, declManager->FindMaterial( material ), gameLocal.slow.time /* _D3XP */ );
+	gameRenderWorld->ProjectDecalOntoWorld( winding, projectionOrigin, parallel, depth * 0.5f, declManager->FindMaterial( material ), GAMELOCAL_SLOW_TIME );
 }
 
 /*
@@ -4757,12 +4755,15 @@ bool idGameLocal::IsPortalSkyAcive() {
 	return portalSkyActive;
 }
 
+#endif
+
 /*
 ===========
 idGameLocal::SelectTimeGroup
 ============
 */
 void idGameLocal::SelectTimeGroup( int timeGroup ) {
+#ifdef _D3XP
 	int i = 0;
 
 	if ( timeGroup ) {
@@ -4770,6 +4771,7 @@ void idGameLocal::SelectTimeGroup( int timeGroup ) {
 	} else {
 		slow.Get( time, previousTime, msec, framenum, realClientTime );
 	}
+#endif
 }
 
 /*
@@ -4778,11 +4780,15 @@ idGameLocal::GetTimeGroupTime
 ============
 */
 int idGameLocal::GetTimeGroupTime( int timeGroup ) {
+#ifdef _D3XP
 	if ( timeGroup ) {
 		return fast.time;
 	} else {
 		return slow.time;
 	}
+#else
+	return gameLocal.time;
+#endif
 }
 
 /*
@@ -4791,11 +4797,17 @@ idGameLocal::GetBestGameType
 ===============
 */
 void idGameLocal::GetBestGameType( const char* map, const char* gametype, char buf[ MAX_STRING_CHARS ] ) {
-	idStr aux = mpGame.GetBestGametype( map, gametype );
+#ifdef _D3XP
+    idStr aux = mpGame.GetBestGametype( map, gametype );
 	strncpy( buf, aux.c_str(), MAX_STRING_CHARS );
 	buf[ MAX_STRING_CHARS - 1 ] = '\0';
+#else
+	strncpy( buf, gametype, MAX_STRING_CHARS );
+	buf[ MAX_STRING_CHARS - 1 ] = '\0';
+#endif
 }
 
+#ifdef _D3XP
 /*
 ===========
 idGameLocal::ComputeSlowMsec
@@ -4917,18 +4929,20 @@ void idGameLocal::QuickSlowmoReset() {
 	quickSlowmoReset = true;
 }
 
+#endif
+
 /*
 ===============
 idGameLocal::NeedRestart
 ===============
 */
 bool idGameLocal::NeedRestart() {
-	
+
 	idDict		newInfo;
 	const idKeyValue *keyval, *keyval2;
 
 	newInfo = *cvarSystem->MoveCVarsToDict( CVAR_SERVERINFO );
-	
+
 	for ( int i = 0; i < newInfo.GetNumKeyVals(); i++ ) {
 		keyval = newInfo.GetKeyVal( i );
 		keyval2 = serverInfo.FindKey( keyval->GetKey() );
@@ -4942,8 +4956,6 @@ bool idGameLocal::NeedRestart() {
 	}
 	return false;
 }
-
-#endif
 
 /*
 ================
@@ -4963,7 +4975,14 @@ idGameLocal::SwitchTeam
 void idGameLocal::SwitchTeam( int clientNum, int team ) {
 
 	idPlayer *   player;
+#ifdef _D3XP
 	player = static_cast< idPlayer * >( entities[ clientNum ] );
+#else
+	player = clientNum >= 0 ? static_cast<idPlayer *>( gameLocal.entities[ clientNum ] ) : NULL;
+
+	if ( !player )
+		return;
+#endif
 	int oldTeam = player->team ;
 
 	// Put in spectator mode
@@ -4974,7 +4993,9 @@ void idGameLocal::SwitchTeam( int clientNum, int team ) {
 	else {
 		mpGame.SwitchToTeam ( clientNum, oldTeam, team );
 	}
+#ifdef _D3XP
 	player->forceRespawn = true ;
+#endif
 }
 
 /*

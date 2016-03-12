@@ -1898,7 +1898,7 @@ void idFuncSmoke::Think( void ) {
 	}
 
 	if ( ( thinkFlags & TH_UPDATEPARTICLES) && !IsHidden() ) {
-		if ( !gameLocal.smokeParticles->EmitSmoke( smoke, smokeTime, gameLocal.random.CRandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis(), timeGroup /*_D3XP*/ ) ) {
+		if ( !gameLocal.smokeParticles->EmitSmoke( smoke, smokeTime, gameLocal.random.CRandomFloat(), GetPhysics()->GetOrigin(), GetPhysics()->GetAxis() D3XP_OPTIONAL(timeGroup) ) ) {
 			if ( restart ) {
 				smokeTime = gameLocal.time;
 			} else {
@@ -3035,9 +3035,23 @@ void idPhantomObjects::Restore( idRestoreGame *savefile ) {
 	for( i = 0; i < num; i++ ) {
 		savefile->ReadInt( targetTime[ i ] );
 	}
+#ifdef _D3XP
 	for( i = 0; i < num; i++ ) {
 		savefile->ReadVec3( lastTargetPos[ i ] );
 	}
+#else
+	if ( savefile->GetBuildNumber() == INITIAL_RELEASE_BUILD_NUMBER ) {
+		// these weren't saved out in the first release
+		for( i = 0; i < num; i++ ) {
+			lastTargetPos[ i ].Zero();
+		}
+	} else {
+		for( i = 0; i < num; i++ ) {
+			savefile->ReadVec3( lastTargetPos[ i ] );
+		}
+	}
+#endif
+
 }
 
 /*

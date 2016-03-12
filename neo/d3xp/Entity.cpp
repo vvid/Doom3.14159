@@ -1327,9 +1327,15 @@ void idEntity::UpdatePVSAreas( void ) {
 
 	// FIXME: some particle systems may have huge bounds and end up in many PVS areas
 	// the first MAX_PVS_AREAS may not be visible to a network client and as a result the particle system may not show up when it should
+#ifdef _D3XP
 	if ( localNumPVSAreas > MAX_PVS_AREAS ) {
 		localNumPVSAreas = gameLocal.pvs.GetPVSAreas( idBounds( renderEntity.origin ).Expand( 64.0f ), localPVSAreas, sizeof( localPVSAreas ) / sizeof( localPVSAreas[0] ) );
 	}
+#else
+    if ( localNumPVSAreas > MAX_PVS_AREAS ) {
+        localNumPVSAreas = gameLocal.pvs.GetPVSAreas( idBounds( modelAbsBounds.GetCenter() ).Expand( 64.0f ), localPVSAreas, sizeof( localPVSAreas ) / sizeof( localPVSAreas[0] ) );
+    }
+#endif
 
 	for ( numPVSAreas = 0; numPVSAreas < MAX_PVS_AREAS && numPVSAreas < localNumPVSAreas; numPVSAreas++ ) {
 		PVSAreas[numPVSAreas] = localPVSAreas[numPVSAreas];
@@ -1694,7 +1700,7 @@ bool idEntity::StartSoundShader( const idSoundShader *shader, const s_channelTyp
 
 	UpdateSound();
 
-	len = refSound.referenceSound->StartSound( shader, channel, diversity, soundShaderFlags, !timeGroup /*_D3XP*/ );
+    len = refSound.referenceSound->StartSound( shader, channel, diversity, soundShaderFlags D3XP_OPTIONAL(!timeGroup));
 	if ( length ) {
 		*length = len;
 	}
@@ -5463,7 +5469,7 @@ void idAnimatedEntity::UpdateDamageEffects( void ) {
 		axis *= renderEntity.axis;
 		origin = renderEntity.origin + origin * renderEntity.axis;
 		start = origin + de->localOrigin * axis;
-		if ( !gameLocal.smokeParticles->EmitSmoke( de->type, de->time, gameLocal.random.CRandomFloat(), start, axis, timeGroup /*_D3XP*/ ) ) {
+		if ( !gameLocal.smokeParticles->EmitSmoke( de->type, de->time, gameLocal.random.CRandomFloat(), start, axis D3XP_OPTIONAL(timeGroup) ) ) {
 			de->time = 0;
 		}
 	}

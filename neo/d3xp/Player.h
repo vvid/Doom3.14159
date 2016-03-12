@@ -197,7 +197,7 @@ public:
 	int						WeaponIndexForAmmoClass( const idDict & spawnArgs, const char *ammo_classname ) const;
 	ammo_t					AmmoIndexForWeaponClass( const char *weapon_classname, int *ammoRequired );
 	const char *			AmmoPickupNameForIndex( ammo_t ammonum ) const;
-	void					AddPickupName( const char *name, const char *icon, idPlayer* owner ); //_D3XP
+	void					AddPickupName( const char *name, const char *icon, idPlayer* owner = NULL ); //_D3XP
 
 	int						HasAmmo( ammo_t type, int amount );
 	bool					UseAmmo( ammo_t type, int amount );
@@ -788,12 +788,12 @@ private:
 	void					Event_HideTip( void );
 	void					Event_LevelTrigger( void );
 	void					Event_Gibbed( void );
+    void					Event_GetIdealWeapon( void );
 
 #ifdef _D3XP //BSM: Event to remove inventory items. Useful with powercells.
 	void					Event_GiveInventoryItem( const char* name );
 	void					Event_RemoveInventoryItem( const char* name );
 
-	void					Event_GetIdealWeapon( void );
 	void					Event_WeaponAvailable( const char* name );
 	void					Event_SetPowerupTime( int powerup, int time );
 	void					Event_IsPowerupActive( int powerup );

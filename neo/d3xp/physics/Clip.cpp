@@ -976,6 +976,9 @@ ID_INLINE bool TestHugeTranslation( trace_t &results, const idClipModel *mdl, co
 		results.endAxis = trmAxis;
 		memset( &results.c, 0, sizeof( results.c ) );
 		results.c.point = start;
+#ifndef _D3XP
+		results.c.entityNum = ENTITYNUM_WORLD;
+#endif
 
 		if ( mdl->GetEntity() ) {
 			gameLocal.Printf( "huge translation for clip model %d on entity %d '%s'\n", mdl->GetId(), mdl->GetEntity()->entityNumber, mdl->GetEntity()->GetName() );

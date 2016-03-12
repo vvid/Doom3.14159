@@ -71,6 +71,8 @@ typedef enum {
 #define TIME_GROUP2		1
 #endif
 
+
+
 class idGame {
 public:
 	virtual						~idGame() {}

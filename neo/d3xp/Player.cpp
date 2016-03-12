@@ -796,9 +796,10 @@ void idInventory::AddPickupName( const char *name, const char *icon, idPlayer* o
 			msg.WriteString( name, MAX_EVENT_PARAM_SIZE );
 			owner->ServerSendEvent( idPlayer::EVENT_PICKUPNAME, &msg, false, -1 );
 		}
-	} 
 #endif
+    }
 }
+
 
 /*
 ==============
@@ -945,7 +946,11 @@ bool idInventory::Give( idPlayer *owner, const idDict &spawnArgs, const char *st
 
 			if ( !gameLocal.world->spawnArgs.GetBool( "no_Weapons" ) || ( weaponName == "weapon_fists" ) || ( weaponName == "weapon_soulcube" ) ) {
 				if ( ( weapons & ( 1 << i ) ) == 0 || gameLocal.isMultiplayer ) {
-					if ( owner->GetUserInfo()->GetBool( "ui_autoSwitch" ) && idealWeapon && i != owner->weapon_bloodstone_active1 && i != owner->weapon_bloodstone_active2 && i != owner->weapon_bloodstone_active3) {
+					if ( owner->GetUserInfo()->GetBool( "ui_autoSwitch" ) && idealWeapon
+#ifdef _D3XP
+                        && i != owner->weapon_bloodstone_active1 && i != owner->weapon_bloodstone_active2 && i != owner->weapon_bloodstone_active3
+#endif
+                        ) {
 						assert( !gameLocal.isClient );
 						*idealWeapon = i;
 					} 
@@ -2845,12 +2850,14 @@ void idPlayer::UpdateSkinSetup( bool restart ) {
 		colorBarIndex = 3;
 	} else if ( baseSkinName.Find( "yellow" ) != -1 ) {
 		colorBarIndex = 4;
+#ifdef _D3XP
 	} else if ( baseSkinName.Find( "grey" ) != -1 ) {
 		colorBarIndex = 5;
 	} else if ( baseSkinName.Find( "purple" ) != -1 ) {
 		colorBarIndex = 6;
 	} else if ( baseSkinName.Find( "orange" ) != -1 ) {
 		colorBarIndex = 7;
+#endif
 	} else {
 		colorBarIndex = 0;
 	}
@@ -3687,16 +3694,21 @@ bool idPlayer::GivePowerUp( int powerup, int time ) {
 
 		switch( powerup ) {
 			case BERSERK: {
-				if(gameLocal.isMultiplayer && !gameLocal.isClient) {
+#ifdef _D3XP
+                if ( gameLocal.isMultiplayer && !gameLocal.isClient ) {
 					inventory.AddPickupName("#str_00100627", "", this);
 				}
 
-				if(gameLocal.isMultiplayer) {
+				if ( gameLocal.isMultiplayer ) {
 					if ( spawnArgs.GetString( "snd_berserk_third", "", &sound ) ) {
 						StartSoundShader( declManager->FindSound( sound ), SND_CHANNEL_DEMONIC, 0, false, NULL );
 					}
 				}
-			
+#else
+                if ( spawnArgs.GetString( "snd_berserk_third", "", &sound ) ) {
+                    StartSoundShader( declManager->FindSound( sound ), SND_CHANNEL_DEMONIC, 0, false, NULL );
+                }
+#endif
 
 				if ( baseSkinName.Length() ) {
 					powerUpSkin = declManager->FindSkin( baseSkinName + "_berserk" );
@@ -3718,10 +3730,12 @@ bool idPlayer::GivePowerUp( int powerup, int time ) {
 				break;
 			}
 			case INVISIBILITY: {
-				if(gameLocal.isMultiplayer && !gameLocal.isClient) {
+#ifdef _D3XP
+				if ( gameLocal.isMultiplayer && !gameLocal.isClient ) {
 					inventory.AddPickupName("#str_00100628", "", this);
 				}
-				spawnArgs.GetString( "skin_invisibility", "", &skin );
+#endif
+                spawnArgs.GetString( "skin_invisibility", "", &skin );
 				powerUpSkin = declManager->FindSkin( skin );
 				// remove any decals from the model
 				if ( modelDefHandle != -1 ) {
@@ -3730,9 +3744,11 @@ bool idPlayer::GivePowerUp( int powerup, int time ) {
 				if ( weapon.GetEntity() ) {
 					weapon.GetEntity()->UpdateSkin();
 				}
-/*				if ( spawnArgs.GetString( "snd_invisibility", "", &sound ) ) {
+#ifndef _D3XP
+				if ( spawnArgs.GetString( "snd_invisibility", "", &sound ) ) {
 					StartSoundShader( declManager->FindSound( sound ), SND_CHANNEL_ANY, 0, false, NULL );
-				} */
+				}
+#endif
 				break;
 			}
 			case ADRENALINE: {
@@ -3743,9 +3759,11 @@ bool idPlayer::GivePowerUp( int powerup, int time ) {
 				break;
 			 }
 			case MEGAHEALTH: {
+#ifdef _D3XP
 				if(gameLocal.isMultiplayer && !gameLocal.isClient) {
 					inventory.AddPickupName("#str_00100629", "", this);
 				}
+#endif
 				if ( spawnArgs.GetString( "snd_megahealth", "", &sound ) ) {
 					StartSoundShader( declManager->FindSound( sound ), SND_CHANNEL_ANY, 0, false, NULL );
 				}
@@ -3855,13 +3873,15 @@ void idPlayer::ClearPowerup( int i ) {
 	inventory.powerupEndTime[ i ] = 0;
 	switch( i ) {
 		case BERSERK: {
+#ifdef _D3XP
 			if(gameLocal.isMultiplayer) {
 				StopSound( SND_CHANNEL_DEMONIC, false );
 			}
-#ifdef _D3XP
 			if(!gameLocal.isMultiplayer) {
 				StopHealthRecharge();
 			}
+#else
+			StopSound( SND_CHANNEL_DEMONIC, false );
 #endif
 			break;
 		}
@@ -6111,6 +6131,8 @@ void idPlayer::UpdateAir( void ) {
 	}
 }
 
+#ifdef _D3XP
+
 void idPlayer::UpdatePowerupHud() {
 	
 	if ( health <= 0 ) {
@@ -6146,6 +6168,8 @@ void idPlayer::UpdatePowerupHud() {
 		}
 	}
 }
+
+#endif
 
 /*
 ==============
@@ -6646,7 +6670,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 			}
 			break;
 		}
-
+#ifdef _D3XP
 		case IMPULSE_25: {
 			if ( gameLocal.isServer && gameLocal.mpGame.IsGametypeFlagBased() && (gameLocal.serverInfo.GetInt( "si_midnight" ) == 2) ) {
 				if ( enviroSuitLight.IsValid() ) {
@@ -6684,7 +6708,7 @@ void idPlayer::PerformImpulse( int impulse ) {
 			}
 			break;
 		}
-
+#endif
 		case IMPULSE_28: {
 			if ( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
 				gameLocal.mpGame.CastVote( gameLocal.localClientNum, true );
@@ -7158,13 +7182,13 @@ void idPlayer::UpdateHud( void ) {
 			}
 			int i;
 
-#ifdef _D3XP
 			int count = 5;
+#ifdef _D3XP
 			if(gameLocal.isMultiplayer) {
 				count = 3;
 			}
 #endif
-			for ( i = 0; i < count, i < c; i++ ) { //_D3XP
+			for ( i = 0; i < count && i < c; i++ ) { //_D3XP
 				hud->SetStateString( va( "itemtext%i", inventory.nextItemNum ), inventory.pickupItemNames[0].name );
 				hud->SetStateString( va( "itemicon%i", inventory.nextItemNum ), inventory.pickupItemNames[0].icon );
 				hud->HandleNamedEvent( va( "itemPickup%i", inventory.nextItemNum++ ) );
@@ -10012,6 +10036,23 @@ idPlayer::Event_Gibbed
 void idPlayer::Event_Gibbed( void ) {
 	// do nothing
 }
+
+#ifndef _D3XP
+/*
+=================
+idPlayer::Event_GetIdealWeapon
+==================
+*/
+void idPlayer::Event_GetIdealWeapon( void ) {
+	const char *weapon;
+	if ( idealWeapon >= 0 ) {
+		weapon = spawnArgs.GetString( va( "def_weapon%d", idealWeapon ) );
+		idThread::ReturnString( weapon );
+	} else {
+		idThread::ReturnString( "" );
+	}
+}
+#endif
 
 /*
 ===============

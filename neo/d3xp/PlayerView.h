@@ -382,6 +382,11 @@ public:
 
 private:
 	void				SingleView( idUserInterface *hud, const renderView_t *view );
+#ifndef _D3XP
+	void				DoubleVision( idUserInterface *hud, const renderView_t *view, int offset );
+	void				BerserkVision( idUserInterface *hud, const renderView_t *view );
+	void				InfluenceVision( idUserInterface *hud, const renderView_t *view );
+#endif
 	void				ScreenFade();
 
 	screenBlob_t *		GetScreenBlob();

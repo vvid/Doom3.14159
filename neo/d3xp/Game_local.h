@@ -85,6 +85,22 @@ class idLocationEntity;
 #define	ENTITYNUM_WORLD			(MAX_GENTITIES-2)
 #define	ENTITYNUM_MAX_NORMAL	(MAX_GENTITIES-2)
 
+
+#ifdef _D3XP
+#define D3XP_OPTIONAL(p) , p
+#else
+#define D3XP_OPTIONAL(p)
+#endif
+
+
+#ifdef _D3XP
+#define GAMELOCAL_SLOW_TIME gameLocal.slow.time
+#define GAMELOCAL_FAST_TIME gameLocal.fast.time
+#else
+#define GAMELOCAL_SLOW_TIME gameLocal.time
+#define GAMELOCAL_FAST_TIME gameLocal.time
+#endif
+
 //============================================================================
 
 void gameError( const char *fmt, ... );
@@ -317,8 +333,11 @@ public:
 	int						framenum;
 	int						previousTime;			// time in msec of last frame
 	int						time;					// in msec
+#ifdef _D3XP
 	int						msec;					// time since last update in milliseconds
-
+#else
+	static const int		msec = USERCMD_MSEC;	// time since last update in milliseconds
+#endif
 	int						vacuumAreaNum;			// -1 if level doesn't have any outside areas
 
 	gameType_t				gameType;
@@ -365,10 +384,8 @@ public:
 	void					ResetSlowTimeVars();
 	void					QuickSlowmoReset();
 
-	bool					NeedRestart();
-#endif
-
 	void					Tokenize( idStrList &out, const char *in );
+#endif
 
 	// ---------------------- Public idGame Interface -------------------
 
@@ -409,13 +426,14 @@ public:
 	virtual void			ClientProcessReliableMessage( int clientNum, const idBitMsg &msg );
 	virtual gameReturn_t	ClientPrediction( int clientNum, const usercmd_t *clientCmds, bool lastPredictFrame );
 
+
 	virtual void			GetClientStats( int clientNum, char *data, const int len );
 	virtual void			SwitchTeam( int clientNum, int team );
 
 	virtual bool			DownloadRequest( const char *IP, const char *guid, const char *paks, char urls[ MAX_STRING_CHARS ] );
-
-	virtual void				GetMapLoadingGUI( char gui[ MAX_STRING_CHARS ] );
-
+#ifdef _D3XP
+	virtual void			GetMapLoadingGUI( char gui[ MAX_STRING_CHARS ] );
+#endif
 	// ---------------------- Public idGameLocal Interface -------------------
 
 	void					Printf( const char *fmt, ... ) const id_attribute((format(printf,2,3)));
@@ -527,7 +545,7 @@ public:
 	void					SetGibTime( int _time ) { nextGibTime = _time; };
 	int						GetGibTime() { return nextGibTime; };
 
-
+	bool					NeedRestart();
 
 private:
 	const static int		INITIAL_SPAWN_COUNT = 1;
@@ -542,7 +560,7 @@ private:
 	idLocationEntity **		locationEntities;		// for location names, etc
 
 	idCamera *				camera;
-	const idMaterial *		globalMaterial;		// for overriding everything
+	const idMaterial *		globalMaterial;			// for overriding everything
 
 	idList<idAAS *>			aasList;				// area system
 	idStrList				aasNames;
@@ -629,8 +647,19 @@ private:
 
 	void					DumpOggSounds( void );
 	void					GetShakeSounds( const idDict *dict );
+#ifndef _D3XP
+	void					SelectTimeGroup( int timeGroup );
+	int						GetTimeGroupTime( int timeGroup );
+	void					GetBestGameType( const char* map, const char* gametype, char buf[ MAX_STRING_CHARS ] );
+
+	void					Tokenize( idStrList &out, const char *in );
+#endif
 
 	void					UpdateLagometer( int aheadOfServer, int dupeUsercmds );
+#ifndef _D3XP
+	void					GetMapLoadingGUI( char gui[ MAX_STRING_CHARS ] );
+#endif
+
 };
 
 //============================================================================
