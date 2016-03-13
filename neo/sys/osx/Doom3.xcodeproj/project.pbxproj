@@ -62,15 +62,9 @@
 		812258680912BC79005D34B9 /* snd_world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257040912BC79005D34B9 /* snd_world.cpp */; };
 		812258690912BC79005D34B9 /* Model_ma.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257070912BC79005D34B9 /* Model_ma.cpp */; };
 		8122586A0912BC79005D34B9 /* Model_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257080912BC79005D34B9 /* Model_sprite.cpp */; };
-		8122586B0912BC79005D34B9 /* cg_explicit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257090912BC79005D34B9 /* cg_explicit.cpp */; };
 		8122586C0912BC79005D34B9 /* Cinematic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122570B0912BC79005D34B9 /* Cinematic.cpp */; };
-		8122586D0912BC79005D34B9 /* draw_arb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122570D0912BC79005D34B9 /* draw_arb.cpp */; };
 		8122586E0912BC79005D34B9 /* draw_arb2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122570E0912BC79005D34B9 /* draw_arb2.cpp */; };
 		8122586F0912BC79005D34B9 /* draw_common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122570F0912BC79005D34B9 /* draw_common.cpp */; };
-		812258710912BC79005D34B9 /* draw_exp_stub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257110912BC79005D34B9 /* draw_exp_stub.cpp */; };
-		812258720912BC79005D34B9 /* draw_nv10.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257120912BC79005D34B9 /* draw_nv10.cpp */; };
-		812258730912BC79005D34B9 /* draw_nv20.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257130912BC79005D34B9 /* draw_nv20.cpp */; };
-		812258740912BC79005D34B9 /* draw_r200.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257140912BC79005D34B9 /* draw_r200.cpp */; };
 		812258750912BC79005D34B9 /* GuiModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257160912BC79005D34B9 /* GuiModel.cpp */; };
 		812258760912BC79005D34B9 /* Image_files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812257190912BC79005D34B9 /* Image_files.cpp */; };
 		812258770912BC79005D34B9 /* Image_init.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122571A0912BC79005D34B9 /* Image_init.cpp */; };
@@ -432,18 +426,10 @@
 		812257050912BC79005D34B9 /* sound.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sound.h; sourceTree = "<group>"; };
 		812257070912BC79005D34B9 /* Model_ma.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Model_ma.cpp; sourceTree = "<group>"; };
 		812257080912BC79005D34B9 /* Model_sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Model_sprite.cpp; sourceTree = "<group>"; };
-		812257090912BC79005D34B9 /* cg_explicit.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = cg_explicit.cpp; sourceTree = "<group>"; };
-		8122570A0912BC79005D34B9 /* cg_explicit.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = cg_explicit.h; sourceTree = "<group>"; };
 		8122570B0912BC79005D34B9 /* Cinematic.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Cinematic.cpp; sourceTree = "<group>"; };
 		8122570C0912BC79005D34B9 /* Cinematic.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Cinematic.h; sourceTree = "<group>"; };
-		8122570D0912BC79005D34B9 /* draw_arb.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_arb.cpp; sourceTree = "<group>"; };
 		8122570E0912BC79005D34B9 /* draw_arb2.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_arb2.cpp; sourceTree = "<group>"; };
 		8122570F0912BC79005D34B9 /* draw_common.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_common.cpp; sourceTree = "<group>"; };
-		812257100912BC79005D34B9 /* draw_exp.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_exp.cpp; sourceTree = "<group>"; };
-		812257110912BC79005D34B9 /* draw_exp_stub.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_exp_stub.cpp; sourceTree = "<group>"; };
-		812257120912BC79005D34B9 /* draw_nv10.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_nv10.cpp; sourceTree = "<group>"; };
-		812257130912BC79005D34B9 /* draw_nv20.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_nv20.cpp; sourceTree = "<group>"; };
-		812257140912BC79005D34B9 /* draw_r200.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = draw_r200.cpp; sourceTree = "<group>"; };
 		812257150912BC79005D34B9 /* glext.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = glext.h; sourceTree = "<group>"; };
 		812257160912BC79005D34B9 /* GuiModel.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GuiModel.cpp; sourceTree = "<group>"; };
 		812257170912BC79005D34B9 /* GuiModel.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuiModel.h; sourceTree = "<group>"; };
@@ -1151,18 +1137,10 @@
 			children = (
 				812257070912BC79005D34B9 /* Model_ma.cpp */,
 				812257080912BC79005D34B9 /* Model_sprite.cpp */,
-				812257090912BC79005D34B9 /* cg_explicit.cpp */,
-				8122570A0912BC79005D34B9 /* cg_explicit.h */,
 				8122570B0912BC79005D34B9 /* Cinematic.cpp */,
 				8122570C0912BC79005D34B9 /* Cinematic.h */,
-				8122570D0912BC79005D34B9 /* draw_arb.cpp */,
 				8122570E0912BC79005D34B9 /* draw_arb2.cpp */,
 				8122570F0912BC79005D34B9 /* draw_common.cpp */,
-				812257100912BC79005D34B9 /* draw_exp.cpp */,
-				812257110912BC79005D34B9 /* draw_exp_stub.cpp */,
-				812257120912BC79005D34B9 /* draw_nv10.cpp */,
-				812257130912BC79005D34B9 /* draw_nv20.cpp */,
-				812257140912BC79005D34B9 /* draw_r200.cpp */,
 				812257150912BC79005D34B9 /* glext.h */,
 				812257160912BC79005D34B9 /* GuiModel.cpp */,
 				812257170912BC79005D34B9 /* GuiModel.h */,
@@ -1822,19 +1800,13 @@
 				B7056B561C93CD9E00DF00F6 /* Clip.cpp in Sources */,
 				812258690912BC79005D34B9 /* Model_ma.cpp in Sources */,
 				8122586A0912BC79005D34B9 /* Model_sprite.cpp in Sources */,
-				8122586B0912BC79005D34B9 /* cg_explicit.cpp in Sources */,
 				8122586C0912BC79005D34B9 /* Cinematic.cpp in Sources */,
 				B7056B661C93CD9E00DF00F6 /* Physics.cpp in Sources */,
 				B7056B621C93CD9E00DF00F6 /* Physics_Player.cpp in Sources */,
-				8122586D0912BC79005D34B9 /* draw_arb.cpp in Sources */,
 				B7056B641C93CD9E00DF00F6 /* Physics_Static.cpp in Sources */,
 				8122586E0912BC79005D34B9 /* draw_arb2.cpp in Sources */,
 				8122586F0912BC79005D34B9 /* draw_common.cpp in Sources */,
-				812258710912BC79005D34B9 /* draw_exp_stub.cpp in Sources */,
-				812258720912BC79005D34B9 /* draw_nv10.cpp in Sources */,
-				812258730912BC79005D34B9 /* draw_nv20.cpp in Sources */,
 				B7E400541C93A4CD00FE59B7 /* SecurityCamera.cpp in Sources */,
-				812258740912BC79005D34B9 /* draw_r200.cpp in Sources */,
 				812258750912BC79005D34B9 /* GuiModel.cpp in Sources */,
 				B72E0A751C94E3C900B3A57A /* roqParam.cpp in Sources */,
 				812258760912BC79005D34B9 /* Image_files.cpp in Sources */,
