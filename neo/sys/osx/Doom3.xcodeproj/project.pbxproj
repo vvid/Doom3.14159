@@ -10,11 +10,6 @@
 		812258110912BC79005D34B9 /* snd_efxfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122565F0912BC78005D34B9 /* snd_efxfile.cpp */; };
 		812258120912BC79005D34B9 /* GEWindowWrapper_stub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256620912BC78005D34B9 /* GEWindowWrapper_stub.cpp */; };
 		812258130912BC79005D34B9 /* edit_stub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256630912BC79005D34B9 /* edit_stub.cpp */; };
-		812258140912BC79005D34B9 /* renderbump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256660912BC79005D34B9 /* renderbump.cpp */; };
-		812258150912BC79005D34B9 /* codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256680912BC79005D34B9 /* codec.cpp */; };
-		812258160912BC79005D34B9 /* NSBitmapImageRep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122566B0912BC79005D34B9 /* NSBitmapImageRep.cpp */; };
-		812258170912BC79005D34B9 /* roq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122566D0912BC79005D34B9 /* roq.cpp */; };
-		812258180912BC79005D34B9 /* roqParam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122566F0912BC79005D34B9 /* roqParam.cpp */; };
 		812258190912BC79005D34B9 /* AASBuild_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256720912BC79005D34B9 /* AASBuild_file.cpp */; };
 		8122581A0912BC79005D34B9 /* AASBuild_gravity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256730912BC79005D34B9 /* AASBuild_gravity.cpp */; };
 		8122581B0912BC79005D34B9 /* AASBuild_ledge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256740912BC79005D34B9 /* AASBuild_ledge.cpp */; };
@@ -279,6 +274,11 @@
 		B7056B721C93CDB500DF00F6 /* Script_Interpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7056B6B1C93CDB500DF00F6 /* Script_Interpreter.cpp */; };
 		B7056B731C93CDB500DF00F6 /* Script_Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7056B6D1C93CDB500DF00F6 /* Script_Program.cpp */; };
 		B7056B741C93CDB500DF00F6 /* Script_Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7056B6F1C93CDB500DF00F6 /* Script_Thread.cpp */; };
+		B72E0A721C94E3BA00B3A57A /* codec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256680912BC79005D34B9 /* codec.cpp */; };
+		B72E0A731C94E3BF00B3A57A /* NSBitmapImageRep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122566B0912BC79005D34B9 /* NSBitmapImageRep.cpp */; };
+		B72E0A741C94E3C400B3A57A /* roq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122566D0912BC79005D34B9 /* roq.cpp */; };
+		B72E0A751C94E3C900B3A57A /* roqParam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8122566F0912BC79005D34B9 /* roqParam.cpp */; };
+		B72E0A761C94E3F900B3A57A /* renderbump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 812256660912BC79005D34B9 /* renderbump.cpp */; };
 		B7BBF01D1C94A249005903D5 /* MultiplayerGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7E4001A1C93A4CD00FE59B7 /* MultiplayerGame.cpp */; };
 		B7BBF01E1C94A24E005903D5 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7E400121C93A4CD00FE59B7 /* Light.cpp */; };
 		B7E400361C93A4CD00FE59B7 /* Actor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7E4FFF21C93A4CD00FE59B7 /* Actor.cpp */; };
@@ -906,6 +906,7 @@
 			);
 			name = Doom3;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
@@ -1754,11 +1755,6 @@
 				812258110912BC79005D34B9 /* snd_efxfile.cpp in Sources */,
 				812258120912BC79005D34B9 /* GEWindowWrapper_stub.cpp in Sources */,
 				812258130912BC79005D34B9 /* edit_stub.cpp in Sources */,
-				812258140912BC79005D34B9 /* renderbump.cpp in Sources */,
-				812258150912BC79005D34B9 /* codec.cpp in Sources */,
-				812258160912BC79005D34B9 /* NSBitmapImageRep.cpp in Sources */,
-				812258170912BC79005D34B9 /* roq.cpp in Sources */,
-				812258180912BC79005D34B9 /* roqParam.cpp in Sources */,
 				812258190912BC79005D34B9 /* AASBuild_file.cpp in Sources */,
 				B7056B571C93CD9E00DF00F6 /* Force_Constant.cpp in Sources */,
 				8122581A0912BC79005D34B9 /* AASBuild_gravity.cpp in Sources */,
@@ -1840,6 +1836,7 @@
 				B7E400541C93A4CD00FE59B7 /* SecurityCamera.cpp in Sources */,
 				812258740912BC79005D34B9 /* draw_r200.cpp in Sources */,
 				812258750912BC79005D34B9 /* GuiModel.cpp in Sources */,
+				B72E0A751C94E3C900B3A57A /* roqParam.cpp in Sources */,
 				812258760912BC79005D34B9 /* Image_files.cpp in Sources */,
 				B7E4003E1C93A4CD00FE59B7 /* Entity.cpp in Sources */,
 				812258770912BC79005D34B9 /* Image_init.cpp in Sources */,
@@ -1859,6 +1856,7 @@
 				B7056B2E1C93CD7C00DF00F6 /* SysCmds.cpp in Sources */,
 				812258840912BC79005D34B9 /* jcmarker.c in Sources */,
 				B7056B731C93CDB500DF00F6 /* Script_Program.cpp in Sources */,
+				B72E0A741C94E3C400B3A57A /* roq.cpp in Sources */,
 				812258850912BC79005D34B9 /* jcmaster.c in Sources */,
 				B7056B741C93CDB500DF00F6 /* Script_Thread.cpp in Sources */,
 				B7E400411C93A4CD00FE59B7 /* Game_network.cpp in Sources */,
@@ -1875,6 +1873,7 @@
 				B7056B5B1C93CD9E00DF00F6 /* Force_Spring.cpp in Sources */,
 				8122588E0912BC79005D34B9 /* jdatadst.c in Sources */,
 				8122588F0912BC79005D34B9 /* jdatasrc.c in Sources */,
+				B72E0A731C94E3BF00B3A57A /* NSBitmapImageRep.cpp in Sources */,
 				812258900912BC79005D34B9 /* jdcoefct.c in Sources */,
 				812258910912BC79005D34B9 /* jdcolor.c in Sources */,
 				B7E400361C93A4CD00FE59B7 /* Actor.cpp in Sources */,
@@ -1975,6 +1974,7 @@
 				B7056B5F1C93CD9E00DF00F6 /* Physics_Base.cpp in Sources */,
 				812258E10912BC79005D34B9 /* DeclEntityDef.cpp in Sources */,
 				B7056B651C93CD9E00DF00F6 /* Physics_StaticMulti.cpp in Sources */,
+				B72E0A721C94E3BA00B3A57A /* codec.cpp in Sources */,
 				812258E20912BC79005D34B9 /* DeclFX.cpp in Sources */,
 				B7E400381C93A4CD00FE59B7 /* AFEntity.cpp in Sources */,
 				812258E30912BC79005D34B9 /* DeclManager.cpp in Sources */,
@@ -1986,6 +1986,7 @@
 				812258E50912BC79005D34B9 /* DeclPDA.cpp in Sources */,
 				812258E60912BC79005D34B9 /* DeclSkin.cpp in Sources */,
 				812258E70912BC79005D34B9 /* DeclTable.cpp in Sources */,
+				B72E0A761C94E3F900B3A57A /* renderbump.cpp in Sources */,
 				B7E4003C1C93A4CD00FE59B7 /* Camera.cpp in Sources */,
 				812258E80912BC79005D34B9 /* DemoFile.cpp in Sources */,
 				812258E90912BC79005D34B9 /* EditField.cpp in Sources */,
@@ -2118,7 +2119,8 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../curl/lib\"";
@@ -2157,6 +2159,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = "";
+				GCC_WARN_UNUSED_VALUE = NO;
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../curl/lib\"";
 				ONLY_ACTIVE_ARCH = YES;
@@ -2193,6 +2196,7 @@
 					MACOS_X,
 				);
 				GCC_REUSE_STRINGS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				MAIN_CPP_DEFINES = _DEBUG;
 				OTHER_CPLUSPLUSFLAGS = (
@@ -2217,6 +2221,7 @@
 					MACOS_X,
 				);
 				GCC_REUSE_STRINGS = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = (
 					"-finline",

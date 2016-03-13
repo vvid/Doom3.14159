@@ -87,7 +87,7 @@ void Cmd_EntityList_f( const idCmdArgs &args ) {
 		size += check->spawnArgs.Allocated();
 	}
 
-	gameLocal.Printf( "...%d entities\n...%d bytes of spawnargs\n", count, size );
+	gameLocal.Printf( "...%d entities\n...%lu bytes of spawnargs\n", count, size );
 }
 
 /*
@@ -1507,7 +1507,7 @@ static void Cmd_ListAnims_f( const idCmdArgs &args ) {
 			}
 		}
 
-		gameLocal.Printf( "%d memory used in %d entity animators\n", size, num );
+		gameLocal.Printf( "%lu memory used in %d entity animators\n", size, num );
 	}
 }
 

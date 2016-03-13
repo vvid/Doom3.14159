@@ -219,7 +219,7 @@
 		81C857AC0912AD0D0095BC33 /* Rotation.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Rotation.cpp; sourceTree = "<group>"; };
 		81C857AD0912AD0D0095BC33 /* Rotation.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Rotation.h; sourceTree = "<group>"; };
 		81C857AE0912AD0D0095BC33 /* Simd.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Simd.cpp; sourceTree = "<group>"; };
-		81C857AF0912AD0D0095BC33 /* Simd.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Simd.h; sourceTree = "<group>"; };
+		81C857AF0912AD0D0095BC33 /* Simd.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Simd.h; sourceTree = "<group>"; usesTabs = 1; };
 		81C857B00912AD0D0095BC33 /* Simd_3DNow.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Simd_3DNow.cpp; sourceTree = "<group>"; };
 		81C857B10912AD0D0095BC33 /* Simd_3DNow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Simd_3DNow.h; sourceTree = "<group>"; };
 		81C857B20912AD0D0095BC33 /* Simd_AltiVec.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Simd_AltiVec.cpp; sourceTree = "<group>"; };
@@ -647,6 +647,7 @@
 					"$(MAIN_CPP_DEFINES)",
 					MACOS_X,
 				);
+				GCC_WARN_UNUSED_VALUE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				MAIN_CPP_DEFINES = _DEBUG;
 				OTHER_CPLUSPLUSFLAGS = (
@@ -672,6 +673,7 @@
 					"$(MAIN_CPP_DEFINES)",
 					MACOS_X,
 				);
+				GCC_WARN_UNUSED_VALUE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -694,6 +696,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";
+				GCC_WARN_UNUSED_VALUE = NO;
 				INSTALL_PATH = "$(HOME)/lib";
 				LIBRARY_STYLE = STATIC;
 				ONLY_ACTIVE_ARCH = YES;
@@ -722,6 +725,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = "";
+				GCC_WARN_UNUSED_VALUE = NO;
 				LIBRARY_STYLE = STATIC;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (

@@ -142,7 +142,12 @@ int		IntForSixtets( byte *in );
 
 
 #ifdef _DEBUG
-void AssertFailed( const char *file, int line, const char *expression );
+#ifdef MACOS_X
+void AssertFailed( const char *file, int line, const char *expression ) __attribute__ ((analyzer_noreturn));
+#else
+void AssertFailed( const char *file, int line, const char *expression ) ;
+#endif
+
 #undef assert
 #define assert( X )		if ( X ) { } else AssertFailed( __FILE__, __LINE__, #X )
 #endif

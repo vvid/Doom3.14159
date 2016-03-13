@@ -512,7 +512,6 @@ Called once each sound frame by the main thread from idSoundWorldLocal::PlaceOri
 */
 void idSoundEmitterLocal::Spatialize( idVec3 listenerPos, int listenerArea, idRenderWorld *rw ) {
 	int			i;
-	bool		hasActive = false;
 
 	//
 	// work out the maximum distance of all the playing channels
@@ -1103,9 +1102,12 @@ idSlowChannel::Reset
 ===================
 */
 void idSlowChannel::Reset() {
-	memset( this, 0, sizeof( *this ) );
+    
+    active = false;
+    playbackState = 0;
 
-	this->chan = chan;
+	this->chan = NULL;
+    lowpass.SetParms();
 
 	curPosition.Set( 0 );
 	newPosition.Set( 0 );

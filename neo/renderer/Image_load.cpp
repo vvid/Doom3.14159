@@ -615,7 +615,8 @@ void idImage::GenerateImage( const byte *pic, int width, int height,
 		R_SetBorderTexels( (byte *)scaledBuffer, width, height, rgba );
 	}
 
-	if ( generatorFunction == NULL && ( depth == TD_BUMP && globalImages->image_writeNormalTGA.GetBool() || depth != TD_BUMP && globalImages->image_writeTGA.GetBool() ) ) {
+	if ( generatorFunction == NULL && ( depth == TD_BUMP && globalImages->image_writeNormalTGA.GetBool() ||
+									    depth != TD_BUMP && globalImages->image_writeTGA.GetBool() ) ) {
 		// Optionally write out the texture to a .tga
 		char filename[MAX_IMAGE_NAME];
 		ImageProgramStringToCompressedFileName( imgName, filename );
@@ -1653,7 +1654,7 @@ void	idImage::ActuallyLoadImage( bool checkForPrecompressed, bool fromBackEnd ) 
 		imageHash = MD4_BlockChecksum( pic, width * height * 4 );
 
 		GenerateImage( pic, width, height, filter, allowDownSize, repeat, depth );
-		timestamp = timestamp;
+		timestamp = timestamp; //FIXME_VV: set to what?
 		precompressedFile = false;
 
 		R_StaticFree( pic );

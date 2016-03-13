@@ -349,7 +349,7 @@ void idCommonLocal::VPrintf( const char *fmt, va_list args ) {
 	// don't overflow
 	if ( idStr::vsnPrintf( msg+timeLength, MAX_PRINT_MSG_SIZE-timeLength-1, fmt, args ) < 0 ) {
 		msg[sizeof(msg)-2] = '\n'; msg[sizeof(msg)-1] = '\0'; // avoid output garbling
-		Sys_Printf( "idCommon::VPrintf: truncated to %d characters\n", strlen(msg)-1 );
+		Sys_Printf( "idCommon::VPrintf: truncated to %lu characters\n", strlen(msg)-1 );
 	}
 
 	if ( rd_buffer ) {
@@ -1356,7 +1356,7 @@ static void Com_Crash_f( const idCmdArgs &args ) {
 		return;
 	}
 
-	* ( int * ) 0 = 0x12345678;
+	* ( volatile int * ) 0 = 0x12345678;
 }
 
 /*

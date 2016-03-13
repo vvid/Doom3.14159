@@ -1885,7 +1885,7 @@ static int CM_FindSplitter( const cm_node_t *node, const idBounds &bounds, int *
 						continue;
 					}
 					// find the most centered splitter
-					t = abs((bounds[1][type] - dist) - (dist - bounds[0][type]));
+					t = fabsf((bounds[1][type] - dist) - (dist - bounds[0][type]));
 					if ( t < bestt ) {
 						bestt = t;
 						*planeType = type;
@@ -1905,7 +1905,7 @@ static int CM_FindSplitter( const cm_node_t *node, const idBounds &bounds, int *
 						continue;
 					}
 					// find the most centered splitter
-					t = abs((bounds[1][type] - dist) - (dist - bounds[0][type]));
+					t = fabsf((bounds[1][type] - dist) - (dist - bounds[0][type]));
 					if ( t < bestt ) {
 						bestt = t;
 						*planeType = type;
@@ -3195,13 +3195,13 @@ idCollisionModelManagerLocal::PrintModelInfo
 ==================
 */
 void idCollisionModelManagerLocal::PrintModelInfo( const cm_model_t *model ) {
-	common->Printf( "%6i vertices (%i KB)\n", model->numVertices, (model->numVertices * sizeof(cm_vertex_t))>>10 );
-	common->Printf( "%6i edges (%i KB)\n", model->numEdges, (model->numEdges * sizeof(cm_edge_t))>>10 );
+	common->Printf( "%6i vertices (%lu KB)\n", model->numVertices, (model->numVertices * sizeof(cm_vertex_t))>>10 );
+	common->Printf( "%6i edges (%lu KB)\n", model->numEdges, (model->numEdges * sizeof(cm_edge_t))>>10 );
 	common->Printf( "%6i polygons (%i KB)\n", model->numPolygons, model->polygonMemory>>10 );
 	common->Printf( "%6i brushes (%i KB)\n", model->numBrushes, model->brushMemory>>10 );
-	common->Printf( "%6i nodes (%i KB)\n", model->numNodes, (model->numNodes * sizeof(cm_node_t))>>10 );
-	common->Printf( "%6i polygon refs (%i KB)\n", model->numPolygonRefs, (model->numPolygonRefs * sizeof(cm_polygonRef_t))>>10 );
-	common->Printf( "%6i brush refs (%i KB)\n", model->numBrushRefs, (model->numBrushRefs * sizeof(cm_brushRef_t))>>10 );
+	common->Printf( "%6i nodes (%lu KB)\n", model->numNodes, (model->numNodes * sizeof(cm_node_t))>>10 );
+	common->Printf( "%6i polygon refs (%lu KB)\n", model->numPolygonRefs, (model->numPolygonRefs * sizeof(cm_polygonRef_t))>>10 );
+	common->Printf( "%6i brush refs (%lu KB)\n", model->numBrushRefs, (model->numBrushRefs * sizeof(cm_brushRef_t))>>10 );
 	common->Printf( "%6i internal edges\n", model->numInternalEdges );
 	common->Printf( "%6i sharp edges\n", model->numSharpEdges );
 	common->Printf( "%6i contained polygons removed\n", model->numRemovedPolys );
